@@ -20,6 +20,25 @@ module.exports = () => {
       new HtmlWebpackPlugin({ 
         template: './index.html', // will search the index.html
         title: 'Type' // replace the <%= HtmlWebpackPlugin.options.title %> 
+      }),
+      new WebpackPwaManifest({
+        name: "Type",
+        orientation: "standalone",
+        display: "standalone", // feel like native browser | has status bar
+        start_url: "./",
+        publicPath: "./",
+        short_name: "Type",
+        description: "A single page text editor",
+        background_color: "#015281",
+        theme_color: "#015281",
+        fingerprints: false,
+        "icons": [
+          {
+            src: path.resolve('assets/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ]
       })
     ],
 
@@ -43,6 +62,7 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              
             },
           },
         },
