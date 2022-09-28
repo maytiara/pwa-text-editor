@@ -25,7 +25,7 @@ module.exports = () => {
 
     module: {
       rules: [
-
+        //Loaders, converts to js file
         //Added CSS LOADER & STYLE LOADER
         {
           test: /\.css$/i,
@@ -34,7 +34,7 @@ module.exports = () => {
         //Added ASSETS
         {
           test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-          type: 'src/images',
+          type: 'src/images', //files destination
         },
         {
           test: /\.m?js$/,
