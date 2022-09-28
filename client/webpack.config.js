@@ -39,7 +39,12 @@ module.exports = () => {
             destination: path.join('assets', 'icons'),
           },
         ]
-      })
+      }),
+      // Injects our custom service worker
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
     ],
 
     module: {
@@ -59,10 +64,10 @@ module.exports = () => {
           test: /\.m?js$/,
           exclude: /(node_modules|bower_components)/,
           use: {
-            loader: 'babel-loader',
+            loader: 'babel-loader', // converts syntax
             options: {
               presets: ['@babel/preset-env'],
-              
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
         },
