@@ -3,8 +3,8 @@ import { openDB } from 'idb';
 const initdb = async () =>
   openDB('type', 1, {
     upgrade(db) {
-      if (db.objectStoreNames.contains('jate')) {
-        console.log('jate database already exists');
+      if (db.objectStoreNames.contains('type')) {
+        console.log('type database already exists');
         return;
       }
       db.createObjectStore('type', { keyPath: 'id', autoIncrement: true });
