@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="./assets/icons/icon_48x48.png">
+
       <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
-      </link>
+
       <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
       </script>
@@ -16,7 +19,7 @@
       </script>
       <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css">
-      </link>
+
   </head>
   <body>
     <nav id="navbar">
@@ -24,9 +27,9 @@
         <a class="btn btn-sm btn-dark" id="buttonInstall" role="button">Install!</a>
       </div>
      <h1>Text Editor</h1>
-      <div class="navbar-brand" 
-            ><img src="./assets/icons/icon_96x96.png"
-          /></div>
+      <div class="navbar-brand" >
+        <img src="./assets/icons/icon_96x96.png"/>
+      </div>
     </nav>
 
     <main id="main">
