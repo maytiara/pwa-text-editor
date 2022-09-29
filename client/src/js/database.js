@@ -31,6 +31,9 @@ export const putDb = async (content) => {
 
   // open the bucket stored data
   const store = tx.objectStore('type');
+
+  // used <PUT> method and applied in the argument (content)
+  const request = store.put({todo: content})
 };
 
 // TODO: Add logic for a method that gets all the content from the database
