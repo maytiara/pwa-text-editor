@@ -28,6 +28,9 @@ export const putDb = async (content) => {
   // create a new transaction. Inside the argument specified the database name & data function
   // .transaction (middleware)
   const tx = typeDb.transaction('type', 'readwrite');
+
+  // open the bucket stored data
+  const store = tx.objectStore('type');
 };
 
 // TODO: Add logic for a method that gets all the content from the database
