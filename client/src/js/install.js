@@ -30,5 +30,9 @@ conditionInstall.addEventListener('click', async () => {
   conditionInstall.classList.toggle('hidden', true);
 });
 
-// TODO: Add an handler for the `appinstalled` event
-window.addEventListener('appinstalled', (event) => {});
+// event handler for the `appinstalled` event
+window.addEventListener('appinstalled', (event) => {
+
+  // Clear prompt
+  window.deferredPrompt = null;
+});
