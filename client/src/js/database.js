@@ -34,6 +34,10 @@ export const putDb = async (content) => {
 
   // used <PUT> method and applied in the argument (content)
   const request = store.put({todo: content})
+
+  // get confirmation of the req
+  const result = await request;
+  console.log('Success 🚀 Data saved to the database', result);
 };
 
 // TODO: Add logic for a method that gets all the content from the database
