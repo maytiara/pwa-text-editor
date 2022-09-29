@@ -23,7 +23,11 @@ export const putDb = async (content) => {
   console.log('Update information sent to database');
 
   // create connection to the database & version of we want to use
-  const typesDb = await openDB('type', 1);
+  const typeDb = await openDB('type', 1);
+
+  // create a new transaction. Inside the argument specified the database name & data function
+  // .transaction (middleware)
+  const tx = typeDb.transaction('type', 'readwrite');
 };
 
 // TODO: Add logic for a method that gets all the content from the database
