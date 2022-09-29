@@ -19,7 +19,7 @@ const initdb = async () =>
   });
 
 // Added logic to a method that accepts content and adds it to the database
-export const putDb = async (content) => {
+export const putDb = async (id, content) => {
   console.log('Update information sent to database');
 
   // create connection to the database & version of we want to use
@@ -34,7 +34,7 @@ export const putDb = async (content) => {
   const store = tx.objectStore('type');
 
   // used <PUT> method and applied in the argument (content)
-  const request = store.put({todo: content})
+  const request = store.put({id: id,todo: content});
 
   // get confirmation of the req
   const result = await request;
