@@ -1,13 +1,18 @@
 const { offlineFallback, warmStrategyCache } = require('workbox-recipes');
-const { CacheFirst } = require('workbox-strategies');
-const { registerRoute } = require('workbox-routing');
-const { CacheableResponsePlugin } = require('workbox-cacheable-response');
-const { ExpirationPlugin } = require('workbox-expiration');
-const { precacheAndRoute } = require('workbox-precaching/precacheAndRoute');
+const { StaleWhileRevalidate, CacheFirst } = require('workbox-strategies'); //
+const { registerRoute } = require('workbox-routing'); //
+const { CacheableResponsePlugin } = require('workbox-cacheable-response'); //
+const { ExpirationPlugin } = require('workbox-expiration'); //
+const { precacheAndRoute } = require('workbox-precaching/precacheAndRoute'); //
 
+
+// The precacheAndRoute() method takes an array of URLs to precache. The self._WB_MANIFEST is an array that contains the list of URLs to precache
+// (ref: wk19:28)
 precacheAndRoute(self.__WB_MANIFEST);
 
 const pageCache = new CacheFirst({
+
+  // Name of the cache storage
   cacheName: 'page-cache',
   plugins: [
     new CacheableResponsePlugin({
@@ -19,6 +24,7 @@ const pageCache = new CacheFirst({
   ],
 });
 
+// part of recipe that loads Urls, in cache = during the service work installation
 warmStrategyCache({
   urls: ['/index.html', '/'],
   strategy: pageCache,
@@ -27,16 +33,46 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // Implement asset caching
+
+// defined the callback function that filters the cache requests for JS and CSS files
+const cacheName = 'static-resources';
+const matchCallback = ({ request }) => {
+  console.log(request);
+  return (
+    // CSS
+    request.destination === 'style' ||
+    // JavaScript
+    request.destination === 'script'
+  );
+};
+
 registerRoute(
-  // Here we define the callback function that will filter the requests we want to cache (in this case, JS and CSS files)
-  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
+  matchCallback,
   new StaleWhileRevalidate({
-    // Name of the cache storage.
-    cacheName: 'asset-cache',
+    cacheName,
     plugins: [
-      // This plugin will cache responses with these headers to a maximum-age of 30 days
       new CacheableResponsePlugin({
         statuses: [0, 200],
+      }),
+    ],
+  })
+);
+
+// Register route for caching images
+// The cache first strategy is often the best choice for images because it saves bandwidth and improves performance.
+registerRoute(
+  ({ request }) => request.destination === 'image',
+  new CacheFirst({
+
+    // Name of the cache storage
+    cacheName: 'my-image-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
       }),
     ],
   })
