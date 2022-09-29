@@ -3,7 +3,6 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
 
 module.exports = () => {
   return {
@@ -16,14 +15,16 @@ module.exports = () => {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
+
+    //Workbox Plugins
     plugins: [
       new HtmlWebpackPlugin({ 
         template: './index.html', // will search the index.html
-        title: 'Type' // replace the <%= HtmlWebpackPlugin.options.title %> 
+        title: 'Type | Text Editor' // replace the <%= HtmlWebpackPlugin.options.title %> 
       }),
       new WebpackPwaManifest({
         name: "Type",
-        orientation: "standalone",
+        orientation: "portrait", // relative to display
         display: "standalone", // feel like native browser | has status bar
         start_url: "./",
         publicPath: "./",
@@ -34,9 +35,9 @@ module.exports = () => {
         fingerprints: false,
         "icons": [
           {
-            src: path.resolve('assets/images/logo.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
-            destination: path.join('assets', 'icons'),
+            destination: path.join('assets', 'icons'), //-
           },
         ]
       }),
@@ -57,7 +58,7 @@ module.exports = () => {
         },
         //Added ASSETS
         {
-          test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'src/images', //files destination
         },
         {
