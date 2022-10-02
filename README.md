@@ -87,7 +87,7 @@ A simple app that lets you create notes or code snippets using your local browse
 </details>
 
 <details>
-<summary>Web accessible</summary>
+<summary>Web accessiblility</summary>
 </details>
 <br />
 <br />
