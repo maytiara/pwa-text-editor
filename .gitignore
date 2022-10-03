@@ -2,3 +2,4 @@ node_modules
 assets
 .npmrc
 .package-lock.json
+Procfile

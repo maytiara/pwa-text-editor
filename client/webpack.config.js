@@ -25,7 +25,7 @@ module.exports = () => {
       new WebpackPwaManifest({
         name: "Type",
         orientation: "portrait", // relative to display
-        display: "standalone", // feel like native browser | has status bar
+        display: "standalone", // feels like native browser | has status bar
         start_url: "./",
         publicPath: "./",
         short_name: "Type",
