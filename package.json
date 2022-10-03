@@ -10,7 +10,7 @@
     "build": "cd client && npm run build",
     "install": "cd client && npm install && cd ../server && npm install",
     "client": "cd client && npm start",
-    "prod": "if-env NODE_ENV=production node server/server.js"
+    "prod": "if-env NODE_ENV=production && npm run start:dev"
   },
   "keywords": [],
   "author": "",
