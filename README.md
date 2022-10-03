@@ -13,7 +13,7 @@
 **Type | Text Editor, is also just another text editor. It's a single-page application that features the requirements of Progressive Web Applications(PWAs). It includes a method to store and retrieve data using the IndexedDB database**
 
 
-[Deployed Link: using Heroku](...)
+[Deployed Link: using Heroku](https://type-te.herokuapp.com/)
 <br />
 <br />
 
